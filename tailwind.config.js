@@ -1,0 +1,24 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./*.{js,php}",
+    "./component/*.{js,php}"],
+  theme: {
+    extend: {
+      keyframes: {
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateY(0)',
+          },
+          '50%': {
+            transform: 'translateY(-20%)',
+          },
+        }
+      },
+      animation: {
+        bounce: 'bounce 1s ease-in-out infinite',
+      }
+    },
+  },
+  plugins: [],
+}
+

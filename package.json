@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "baseline-browser-mapping": "^2.9.8",
+    "caniuse-lite": "^1.0.30001760"
+  }
+}
