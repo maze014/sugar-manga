@@ -15,7 +15,7 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     $result = $stmt->get_result();
     $user = mysqli_fetch_assoc($result);
     if ($user == null) {
-        $_SESSION['validasi'] = "Login gagal! akun anda tidak ada silahkan register!";
+        $_SESSION['validasi'] = "Login gagal! username atau password anda salah!";
     } else {
         if (!isset($_SESSION['username']) and password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;

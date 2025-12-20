@@ -22,6 +22,10 @@ session_start();
         <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['login'] ?></p>
         <?php unset($_SESSION['login']); ?>
     <?php endif; ?>
+    <?php if (isset($_SESSION['delete'])): ?>
+        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['delete'] ?></p>
+        <?php unset($_SESSION['delete']); ?>
+    <?php endif; ?>
     <?php include "./component/navbar_mobile.php" ?>
 </body>
 
