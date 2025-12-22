@@ -26,6 +26,14 @@ session_start();
         <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['delete'] ?></p>
         <?php unset($_SESSION['delete']); ?>
     <?php endif; ?>
+    <?php if (isset($_SESSION['pesan_edit'])): ?>
+        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['pesan_edit'] ?></p>
+        <?php unset($_SESSION['pesan_edit']); ?>
+    <?php endif; ?>
+    <?php if (isset($_SESSION['pesan_edit_upload'])): ?>
+        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['pesan_edit_upload'] ?></p>
+        <?php unset($_SESSION['pesan_edit_upload']); ?>
+    <?php endif; ?>
     <?php include "./component/navbar_mobile.php" ?>
 </body>
 

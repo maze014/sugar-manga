@@ -2,7 +2,7 @@
 session_start();
 include "koneksi.php";
 
-if (isset($_POST['username']) and isset($_POST['password'])) {
+if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -21,10 +21,9 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
             $_SESSION['username'] = $username;
             $_SESSION['login'] = "Anda berhasil Log In";
             header("Location: index.php");
-        } elseif(isset($_SESSION['username']) and password_verify($password, $user['password'])) {
+        } elseif (isset($_SESSION['username']) and password_verify($password, $user['password'])) {
             $_SESSION['validasi'] = "Anda sudah login!";
-        }
-        else {
+        } else {
             $_SESSION['validasi'] = "Login gagal! username atau password anda salah!";
         }
     }
@@ -67,12 +66,12 @@ mysqli_close($conn);
                         </svg>
                     </span>
                 </div>
-                <?php if(isset($_SESSION['validasi'])): ?>
-                <p id="txtHint_login" class="text-red-800 text-md font-light"><?php echo $_SESSION['validasi']; ?></p>
-                <?php unset($_SESSION['validasi']); ?>
+                <?php if (isset($_SESSION['validasi'])): ?>
+                    <p class="text-red-800 text-md font-light"><?php echo htmlspecialchars($_SESSION['validasi']); ?></p>
+                    <?php unset($_SESSION['validasi']); ?>
                 <?php endif; ?>
             </div>
-            <button id ="submit" type="submit" class="bg-violet-700 rounded-full w-1/2 mx-auto font-medium text-lg text-white py-1 shadow-lg shadow-violet-800/60">Log In</button>
+            <button name="submit" type="submit" class="bg-violet-700 rounded-full w-1/2 mx-auto font-medium text-lg text-white py-1 shadow-lg shadow-violet-800/60">Log In</button>
         </form>
         <p class="tracking-wider">Tidak ada akun, register di sini <a href="register.php" class="text-cyan-500 underline underline-offset-4">Register</a></p>
     </div>

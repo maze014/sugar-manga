@@ -2,7 +2,7 @@
 session_start();
 include "koneksi.php";
 
-if (isset($_POST['username']) and isset($_POST['password'])) {
+if (isset($_POST['submit'])) {
     // Simpan data registasi user
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -54,7 +54,7 @@ mysqli_close($conn);
                 <label for="username" class="text-xl tracking-wider">Username</label>
                 <input class="outline-0 ring-1 ring-cyan-500  p-2 rounded-md" id="username" name="username" type="text" placeholder="Masukkan username" autocomplete="off" required />
                 <?php if (isset($_SESSION['validasi'])): ?>
-                    <p id="txtHint" class="text-red-800 text-md font-light"><?php echo $_SESSION['validasi']; ?></p>
+                    <p class="text-red-800 text-md font-light"><?php echo htmlspecialchars($_SESSION['validasi']); ?></p>
                     <?php unset($_SESSION['validasi']); ?>
                 <?php endif; ?>
             </div>
@@ -69,7 +69,7 @@ mysqli_close($conn);
                     </span>
                 </div>
             </div>
-            <button id="submit" type="submit" class="bg-violet-700 rounded-full w-1/2 mx-auto font-medium text-lg text-white py-1 shadow-lg shadow-violet-800/60">Register</button>
+            <button name="submit" type="submit" class="bg-violet-700 rounded-full w-1/2 mx-auto font-medium text-lg text-white py-1 shadow-lg shadow-violet-800/60">Register</button>
         </form>
     </div>
 

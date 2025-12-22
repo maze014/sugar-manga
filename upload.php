@@ -1,48 +1,29 @@
-<?php 
+<?php
 $target_dir = "uploads/";
-$target_file = "";
-$file_size = "";
-if(isset($_FILES['fileToUpload']['name'])) {
-    $target_file = $target_dir . basename($_FILES['fileToUpload']['name']);
-}
-if(isset($_FILES['fileToUpload']['size'])) {
-    $file_size = $_FILES['fileToUpload']['size'];
-}
+$target_file = $target_dir . $_SESSION['username'];
 $uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-//cek apakah ini file gambar asli atau falsu
-if(isset($_POST['submit'])) {
-    $check = getimagesize($_FILES['fileToUpload']['tmp_name']);
-    if($check !== false) {
-        $uploadOk = 1;
-    } else {
-        $uploadOk = 0;
-    }
-}
-
-//cek file sudah ada atau masih belum
-if(file_exists($target_file)) {
+$imageFileType = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+// Allow certain file formats
+if (
+    $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif"
+) {
+    $_SESSION['pesan_edit_upload'] =  "Maaf, hanya JPG, JPEG, PNG dan GIF file yang bisa di upload";
     $uploadOk = 0;
 }
 
-//cek file size lebih dari 2 mb atau 2000000 byte
-if($file_size > 2000000) {
+// Check file size
+if ($_FILES["file"]["size"] > 1000000 and $uploadOk == 1) {
+    $_SESSION['pesan_edit_upload'] = "Maaf, size file anda melebihi 1 mb";
     $uploadOk = 0;
 }
 
-//izinkan sebagian format file
-if($imageFileType != 'jpg' && $imageFileType != 'jpeg' && $imageFileType != 'png' && $imageFileType != 'gif') {
-    $uploadOk = 0;
-}
-
-if($uploadOk == 0) {
-    //nanti ada flash message
-} else {
-    if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
-        //flash message
-    } else {
-        //flash message
-    }
-}
-?>
+// Check if $uploadOk is set to 1
+if ($uploadOk == 1 and !($userBaru != null and $userBaru['username'] != $user['username'])) {
+    move_uploaded_file($_FILES["file"]["tmp_name"], $target_file . '.' . $imageFileType);
+    //query update name_file ke db
+    $stmt = $conn->prepare("UPDATE user SET name_file=? WHERE username=?");
+    $stmt->bind_param('ss', $name_file, $_SESSION['username']);
+    $stmt->execute();
+    $_SESSION['pesan_edit'] = "Anda berhasil mengedit profile";
+} 

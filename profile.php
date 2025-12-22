@@ -1,7 +1,38 @@
 <?php
 session_start();
 include "koneksi.php";
-include "upload.php";
+
+//cek username, password, dan nama_file lama
+$stmt = $conn->prepare("SELECT username, password, name_file FROM user WHERE username=?");
+$stmt->bind_param('s', $_SESSION['username']);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = mysqli_fetch_assoc($result);
+
+//cek apakah ada perubahan salah satu aja
+if ($user != null and isset($_POST['submit'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $name_file = basename($_FILES['file']['name']);
+
+    //cek apakah username ada yang sama dengan yang lain
+    $stmt = $conn->prepare("SELECT username FROM user WHERE username=?");
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $resultBaru = $stmt->get_result();
+    $userBaru = mysqli_fetch_assoc($resultBaru);
+
+    if ($name_file != $user['name_file'] and $name_file != null) {
+        include "upload.php";
+    }
+    if (($username == $user['username'] and !password_verify($password, $user['password'])) or ($username != $user['username'] and $userBaru == null)) {
+        include "edit.php";
+    } elseif ($userBaru != null and $userBaru['username'] != $user['username']) {
+        $_SESSION['pesan_edit'] = "Username sudah digunakan! Silahkan gunakan username lain!";
+    }
+    header("Location: index.php");
+}
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -116,14 +147,14 @@ include "upload.php";
             </span>
         </span>
         <!-- form -->
-        <form action="profile.php" method="post" class="flex flex-col p-5 gap-6">
+        <form action="profile.php" method="post" class="flex flex-col p-5 gap-6" enctype="multipart/form-data">
             <div class="flex flex-col justify-center gap-2">
                 <label for="file" class="text-md text-justify tracking-wider">Upload file dalam bentuk format (.jpg, .jpeg, .png, .gif)</label>
                 <input class="outline-0 ring-1 ring-cyan-500 p-2 rounded-md" id="file" name="file" type="file" />
             </div>
             <div class="flex flex-col justify-center gap-2">
                 <label for="username" class="text-xl tracking-wider">Username</label>
-                <input class="outline-0 ring-1 ring-cyan-500 p-2 rounded-md" id="username" name="username" type="text" placeholder="Masukkan username" autocomplete="off" required />
+                <input class="outline-0 ring-1 ring-cyan-500 p-2 rounded-md" id="username" name="username" type="text" value=<?php echo htmlspecialchars($user['username']) ?> placeholder="Masukkan username" autocomplete="off" required />
             </div>
             <div class="flex flex-col justify-center gap-2">
                 <label for="password" class="text-xl tracking-wider">Password</label>
@@ -135,10 +166,6 @@ include "upload.php";
                         </svg>
                     </span>
                 </div>
-                <?php if (isset($_SESSION['validasi'])): ?>
-                    <p id="txtHint_login" class="text-red-800 text-md font-light"><?php echo $_SESSION['validasi']; ?></p>
-                    <?php unset($_SESSION['validasi']); ?>
-                <?php endif; ?>
             </div>
             <button id="fixEditAkun" type="submit" name="submit" class="bg-amber-500 flex justify-center w-full py-1 shadow-lg shadow-amber-500/60 rounded-full font-medium text-lg text-white">Edit Profile</button>
         </form>
