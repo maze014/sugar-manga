@@ -13,7 +13,9 @@ session_start();
 </head>
 
 <body>
-    <?php include "./component/navbar.php" ?>
+    <div class="hidden md:block">
+        <?php include "./component/navbar.php" ?>
+    </div>
     <?php if (isset($_SESSION['logout'])): ?>
         <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['logout'] ?></p>
         <?php unset($_SESSION['logout']); ?>
@@ -34,7 +36,10 @@ session_start();
         <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['pesan_edit_upload'] ?></p>
         <?php unset($_SESSION['pesan_edit_upload']); ?>
     <?php endif; ?>
-    <?php include "./component/navbar_mobile.php" ?>
+    <div class="md:hidden">
+        <?php include "./component/navbar_mobile.php" ?>
+    </div>
+    <script type="text/javascript" src="./component/detailProfile.js"></script>
 </body>
 
 </html>

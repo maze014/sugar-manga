@@ -1,0 +1,15 @@
+const detailProfile = document.getElementById('detailProfile');
+detailProfile.addEventListener('click', function() {
+    const parentDetailProfile = detailProfile.parentElement;
+    const result = parentDetailProfile.classList.toggle('mb-4');
+    detailProfile.classList.toggle('rotate-180');
+    
+    const saudaraDetailProfile = detailProfile.nextElementSibling;
+    if(result) {
+        saudaraDetailProfile.classList.remove('hidden');
+        saudaraDetailProfile.classList.replace('-bottom-4', '-bottom-5');
+    } else {
+        saudaraDetailProfile.classList.add('hidden');
+        saudaraDetailProfile.classList.replace('-bottom-5', '-bottom-4');
+    }
+})

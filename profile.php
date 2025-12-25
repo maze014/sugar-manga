@@ -179,7 +179,7 @@ mysqli_close($conn);
     <!-- validasi -->
     <?php if (isset($_SESSION['username'])): ?>
         <script type="text/javascript" src="./component/validasi_delete_akun.js"></script>
-        <script src="./component/validation_form.js"></script>
+        <script type="text/javascript" src="./component/validation_form.js"></script>
     <?php endif; ?>
 </body>
 
