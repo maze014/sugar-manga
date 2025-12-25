@@ -19,7 +19,7 @@ if ($_FILES["file"]["size"] > 1000000 and $uploadOk == 1) {
 }
 
 // Check if $uploadOk is set to 1
-if ($uploadOk == 1 and !($userBaru != null and $userBaru['username'] != $user['username'])) {
+if ($uploadOk == 1) {
     move_uploaded_file($_FILES["file"]["tmp_name"], $target_file . '.' . $imageFileType);
     //query update name_file ke db
     $stmt = $conn->prepare("UPDATE user SET name_file=? WHERE username=?");
