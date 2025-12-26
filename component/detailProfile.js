@@ -8,8 +8,10 @@ detailProfile.addEventListener('click', function() {
     if(result) {
         saudaraDetailProfile.classList.remove('hidden');
         saudaraDetailProfile.classList.replace('-bottom-4', '-bottom-5');
+        parentDetailProfile.classList.remove('lg:text-xl');
     } else {
         saudaraDetailProfile.classList.add('hidden');
         saudaraDetailProfile.classList.replace('-bottom-5', '-bottom-4');
+        parentDetailProfile.classList.add('lg:text-xl');
     }
 })

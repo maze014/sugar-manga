@@ -1,5 +1,11 @@
 <?php
 session_start();
+include "koneksi.php";
+$stmt = $conn->prepare("SELECT username, password, name_file FROM user WHERE username=?");
+$stmt->bind_param('s', $_SESSION['username']);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = mysqli_fetch_assoc($result);
 ?>
 
 <!DOCTYPE html>
