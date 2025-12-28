@@ -5,4 +5,4 @@
         </svg>
     </a>
 </span>
-<span class="md:transition md:duration-700 md:hover:scale-110 md:hover:transition md:hover:duration-700 font-medium text-2xl mb-2"><a href="index.php">Sugar manga</a></span>
+<span class="md:transition md:duration-700 md:hover:scale-110 md:hover:transition md:hover:duration-700 font-medium text-2xl mb-2"><a href="index.php">WaifuChan</a></span>
