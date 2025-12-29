@@ -18,7 +18,7 @@ $user = mysqli_fetch_assoc($result);
     <title>WaifuChan</title>
 </head>
 
-<body>
+<body class="bg-[url('https://cdn.nekosia.cat/images/cowgirl/68649ca1563f6b10cc958352-compressed.jpg')] bg-cover bg-center bg-fixed">
     <!-- navbar -->
     <div class="hidden md:block">
         <?php include "./component/navbar.php" ?>
@@ -38,7 +38,7 @@ $user = mysqli_fetch_assoc($result);
     </div>
 
     <!-- tampilan waifu -->
-    <img id="neko" />
+    <div id="neko" class="columns-1 md:columns-2 lg:columns-3 mt-4 mb-24"></div>
 
     <!-- flash message belum fix -->
     <?php if (isset($_SESSION['logout'])): ?>
