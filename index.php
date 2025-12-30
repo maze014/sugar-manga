@@ -20,10 +20,10 @@ $user = mysqli_fetch_assoc($result);
 
 <body class="bg-[url('https://cdn.nekosia.cat/images/cowgirl/68649ca1563f6b10cc958352-compressed.jpg')] bg-cover bg-center bg-fixed">
     <!-- navbar -->
-    <div class="hidden md:block">
+    <div class="hidden md:block fixed top-0 w-full">
         <?php include "./component/navbar.php" ?>
     </div>
-    <div class="md:hidden flex justify-between items-center gap-4">
+    <div class="md:hidden flex fixed top-0 justify-between w-full items-center gap-4 bg-white/40 backdrop-blur-md">
         <div class="flex items-center pl-4 py-3 gap-2">
             <?php include "./component/identitas.php" ?>
         </div>
@@ -37,30 +37,34 @@ $user = mysqli_fetch_assoc($result);
         </div>
     </div>
 
-    <!-- tampilan waifu -->
-    <div id="neko" class="columns-1 md:columns-2 lg:columns-3 mt-4 mb-24"></div>
-
-    <!-- flash message belum fix -->
     <?php if (isset($_SESSION['logout'])): ?>
-        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['logout'] ?></p>
+        <p class="text-red-800 text-lg font-light text-center mt-20"><?php echo $_SESSION['logout'] ?></p>
         <?php unset($_SESSION['logout']); ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['login'])): ?>
-        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['login'] ?></p>
+        <p class="text-red-800 text-lg font-light text-center mt-20"><?php echo $_SESSION['login'] ?></p>
         <?php unset($_SESSION['login']); ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['delete'])): ?>
-        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['delete'] ?></p>
+        <p class="text-red-800 text-lg font-light text-center mt-20"><?php echo $_SESSION['delete'] ?></p>
         <?php unset($_SESSION['delete']); ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['pesan_edit'])): ?>
-        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['pesan_edit'] ?></p>
+        <p class="text-red-800 text-lg font-light text-center mt-20"><?php echo $_SESSION['pesan_edit'] ?></p>
         <?php unset($_SESSION['pesan_edit']); ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['pesan_edit_upload'])): ?>
-        <p class="text-red-800 text-md font-light -mt-5"><?php echo $_SESSION['pesan_edit_upload'] ?></p>
+        <p class="text-red-800 text-lg font-light text-center mt-20"><?php echo $_SESSION['pesan_edit_upload'] ?></p>
         <?php unset($_SESSION['pesan_edit_upload']); ?>
     <?php endif; ?>
+
+    <!-- tags waifu -->
+    <?php include "./component/categories.php" ?>
+
+    <!-- tampilan waifu -->
+    <div id="neko" class="columns-1 md:columns-2 lg:columns-3 mt-4 mb-24 md:mb-8"></div>
+
+    <!-- navbar mobile -->
     <div class="md:hidden">
         <?php include "./component/navbar_mobile.php" ?>
     </div>

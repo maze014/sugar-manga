@@ -15,7 +15,9 @@ if (typeof (Storage) !== "undefined") {
         let result = localStorage.getItem('waifu');
         result = JSON.parse(result);
         // console.log(result);
+        const categories = new Set();
         result.forEach(function (value) {
+            categories.add(value.category);
             $('#neko').append(`<div class="bg-white w-[90%] mx-auto overflow-hidden mb-4 rounded-xl">
         <img src="${value.image.compressed.url}" alt="${value.category}" />
         <div class="flex justify-between item-center p-4 bg-slate-800">
@@ -44,6 +46,13 @@ if (typeof (Storage) !== "undefined") {
             </a>
         </div>
     </div>`);
+
+
         });
-  }
+        // categories
+        // console.log(categories);
+        categories.forEach((category) => {
+            $('#categories').append(`<button type="submit" class="px-6 py-2 bg-violet-700 rounded-xl text-lg font-medium text-nowrap text-white">${category}</button>`);
+        })
+    }
 }

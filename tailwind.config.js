@@ -13,13 +13,24 @@ module.exports = {
           '50%': {
             transform: 'translateY(-20%)',
           },
+        },
+        pulse: {
+          '0%, 100%': {
+            scale: '100%',
+            opacity: '100%'
+          },
+          '50%': {
+            scale: '105%',
+            opacity: '100%'
+          }
         }
       },
       animation: {
         bounce: 'bounce 1s ease-in-out infinite',
+        pulse: 'pulse 1s ease-in-out infinite',
       }
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 }
 
