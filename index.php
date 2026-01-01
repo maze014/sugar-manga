@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['current'] = $_GET['category'] ?? 'null';
 include "koneksi.php";
 $stmt = $conn->prepare("SELECT username, password, name_file FROM user WHERE username=?");
 $stmt->bind_param('s', $_SESSION['username']);
@@ -20,7 +21,7 @@ $user = mysqli_fetch_assoc($result);
 
 <body class="bg-[url('https://cdn.nekosia.cat/images/cowgirl/68649ca1563f6b10cc958352-compressed.jpg')] bg-cover bg-center bg-fixed">
     <!-- navbar -->
-    <div class="hidden md:block fixed top-0 w-full">
+    <div class="hidden md:block fixed top-0 w-full z-10">
         <?php include "./component/navbar.php" ?>
     </div>
     <div class="md:hidden flex fixed top-0 justify-between w-full items-center gap-4 bg-white/40 backdrop-blur-md">
