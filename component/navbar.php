@@ -1,4 +1,4 @@
-<header class="bg-violet-600/50 backdrop-blur-md flex py-4">
+<header class="bg-violet-600/50 backdrop-blur-md flex py-4 px-4">
     <!-- logo -->
     <div class="w-[25%] flex items-center gap-1 justify-start pl-3">
         <span class="transition duration-700 hover:scale-110 hover:transition hover:duration-700">
@@ -24,7 +24,6 @@
         <ul class="flex text-white font-light items-center w-full justify-evenly lg:text-xl">
             <li class="transition duration-700 hover:scale-110 hover:transition hover:duration-700"><a href="index.php">Home</a></li>
             <li class="transition duration-700 hover:scale-110 hover:transition hover:duration-700"><a href="">Favorite</a></li>
-            <li class="transition duration-700 hover:scale-110 hover:transition hover:duration-700"><a href="">Download</a></li>
         </ul>
     </nav>
     <!-- profile -->

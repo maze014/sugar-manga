@@ -21,10 +21,10 @@ $user = mysqli_fetch_assoc($result);
 
 <body class="bg-[url('https://cdn.nekosia.cat/images/cowgirl/68649ca1563f6b10cc958352-compressed.jpg')] bg-cover bg-center bg-fixed">
     <!-- navbar -->
-    <div class="hidden md:block fixed top-0 w-full z-10">
+    <div class="hidden md:block fixed top-0 w-full z-50">
         <?php include "./component/navbar.php" ?>
     </div>
-    <div class="md:hidden flex fixed top-0 justify-between w-full items-center gap-4 bg-white/40 backdrop-blur-md">
+    <div class="md:hidden z-50 flex fixed top-0 justify-between w-full items-center gap-4 bg-white/40 backdrop-blur-md">
         <div class="flex items-center pl-4 py-3 gap-2">
             <?php include "./component/identitas.php" ?>
         </div>
@@ -63,7 +63,7 @@ $user = mysqli_fetch_assoc($result);
     <?php include "./component/categories.php" ?>
 
     <!-- tampilan waifu -->
-    <div id="neko" class="columns-1 md:columns-2 lg:columns-3 mt-4 mb-24 md:mb-8"></div>
+    <div id="neko" class="container max-w-[90%] mx-auto lg:max-w-full columns-1 md:columns-2 lg:columns-3 mt-4 mb-24 md:mb-8"></div>
 
     <!-- navbar mobile -->
     <div class="md:hidden">

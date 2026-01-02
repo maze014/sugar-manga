@@ -46,7 +46,7 @@ mysqli_close($conn);
     </div>
 
     <!-- Logo -->
-    <div class="w-full min-h-[85vh] flex flex-col md:flex-row md:w-[80%] mx-auto justify-center items-center gap-10">
+    <div class="w-full min-h-[80vh] md:min-h-[50vh] container md:mt-28 flex flex-col md:flex-row md:w-[80%] mx-auto justify-center items-center gap-10">
         <?php if (isset($_SESSION['username'])): ?>
             <?php if (isset($user['name_file'])): ?>
                 <div class="shadow-xl shadow-slate-800/60 rounded-full overflow-hidden w-48 h-48 md:w-56 md:h-56">
@@ -60,47 +60,8 @@ mysqli_close($conn);
                 </span>
             <?php endif; ?>
         <?php else: ?>
-            <span class="shadow-xl shadow-slate-800/60 rounded-2xl">
-                <svg width="250" height="250" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0%" stop-color="#f472b6" />
-                            <stop offset="100%" stop-color="#38bdf8" />
-                        </linearGradient>
-                    </defs>
-
-                    <!-- Background -->
-                    <rect width="320" height="320" rx="20" fill="#0f172a" />
-
-                    <!-- Book -->
-                    <rect x="70" y="60" width="180" height="110" rx="10" fill="#f8fafc" />
-                    <line x1="160" y1="60" x2="160" y2="170" stroke="#94a3b8" stroke-width="2" />
-
-                    <!-- Manga lines -->
-                    <line x1="85" y1="80" x2="145" y2="80" stroke="#475569" stroke-width="2" />
-                    <line x1="85" y1="95" x2="145" y2="95" stroke="#475569" stroke-width="2" />
-                    <line x1="175" y1="80" x2="235" y2="80" stroke="#475569" stroke-width="2" />
-                    <line x1="175" y1="95" x2="235" y2="95" stroke="#475569" stroke-width="2" />
-
-                    <!-- Hands -->
-                    <ellipse cx="60" cy="130" rx="20" ry="28" fill="#facc15" />
-                    <ellipse cx="260" cy="130" rx="20" ry="28" fill="#facc15" />
-
-                    <!-- Text -->
-                    <text x="160" y="220" text-anchor="middle"
-                        font-size="36" font-weight="800"
-                        fill="url(#titleGrad)"
-                        font-family="Arial, Helvetica, sans-serif">
-                        SUGAR
-                    </text>
-
-                    <text x="160" y="260" text-anchor="middle"
-                        font-size="32" font-weight="700"
-                        fill="#38bdf8"
-                        font-family="Arial, Helvetica, sans-serif">
-                        MANGA
-                    </text>
-                </svg>
+            <span class="w-1/2 md:w-[40%] lg:w-[35%] rounded-full overflow-hidden">
+                <img class="scale-[1.5]" src="./src/img/logo.png" alt="logo waifuChan">
             </span>
         <?php endif; ?>
         <div class="w-2/3 md:w-[50%] flex flex-col gap-4">
