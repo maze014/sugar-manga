@@ -23,7 +23,7 @@
     <nav class="w-[35%] flex pb-1 px-1 relative">
         <ul class="flex text-white font-light items-center w-full justify-evenly lg:text-xl">
             <li class="transition duration-700 hover:scale-110 hover:transition hover:duration-700"><a href="index.php">Home</a></li>
-            <li class="transition duration-700 hover:scale-110 hover:transition hover:duration-700"><a href="">Favorite</a></li>
+            <li class="transition duration-700 hover:scale-110 hover:transition hover:duration-700"><a href="favorite.php">Favorite</a></li>
         </ul>
     </nav>
     <!-- profile -->

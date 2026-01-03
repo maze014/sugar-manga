@@ -60,3 +60,21 @@ if (isset($_POST['usernameEdit'])) {
         echo "Username sudah digunakan";
     }
 }
+
+//menambahkan favorite ke table favorite menggunakan ajax
+if (isset($_POST['favorite'])) {
+    $favorite = $_POST['favorite'];
+    $username = $_SESSION['username'];
+
+    $stmt = $conn->prepare("SELECT username, id_image FROM favorite WHERE username=? and id_image=?");
+    $stmt->bind_param('ss', $username, $favorite);
+    $stmt->execute();
+    $idImg = $stmt->get_result();
+    $idImg = mysqli_fetch_assoc($idImg);
+    
+    if(!$idImg) {
+        $stmt = $conn->prepare("INSERT INTO favorite (username, id_image) VALUES (?, ?)");
+        $stmt->bind_param('ss', $username, $favorite);
+        $stmt->execute();
+    }
+}

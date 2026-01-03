@@ -6,7 +6,7 @@ const detailContent = (value) => {
         </svg>
     </div>`),
         value.forEach((tag) => {
-            $('#detailContent').append(`<span class="text-md text-white font-medium bg-cyan-500 shadow-md shadow-cyan-500/60 px-6 rounded-xl py-1">${tag}</span>`);
+            $('#detailContent').append(`<span class="hover:bg-white transition hover:text-slate-800 hover:shadow-slate-800/60 text-md text-white font-medium bg-cyan-500 shadow-md shadow-cyan-500/60 px-6 rounded-xl py-1">${tag}</span>`);
         }),
         $('#detailContent').append(`<div class="absolute cursor-pointer hidden md:block -mr-4 right-0">
     <svg class="p-2 bg-cyan-500 shadow-md transition text-white hover:bg-white hover:text-slate-800 hover:shadow-slate-800/60 shadow-cyan-500/60 rounded-full w-9 h-9" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

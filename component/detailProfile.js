@@ -22,6 +22,6 @@ const flashMessage = document.querySelector('p');
 const categories = document.getElementById('categories');
 if(flashMessage) {
     categories.classList.replace('mt-24', 'mt-4');
-} else {
+} else if(categories) {
     categories.classList.replace('mt-4', 'mt-24');
 }
