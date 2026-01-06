@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "koneksi.php";
+$username = $_SESSION['username'];
 
 // validasi password
 if (isset($_POST['password'])) {
@@ -35,7 +36,6 @@ if (isset($_POST['password'])) {
 
 //validasi username sudah digunakan form register
 if (isset($_POST['username'])) {
-    $username = $_POST['username'];
 
     $stmt = $conn->prepare("SELECT username FROM user WHERE username=?");
     $stmt->bind_param('s', $username);
@@ -64,17 +64,49 @@ if (isset($_POST['usernameEdit'])) {
 //menambahkan favorite ke table favorite menggunakan ajax
 if (isset($_POST['favorite'])) {
     $favorite = $_POST['favorite'];
-    $username = $_SESSION['username'];
 
     $stmt = $conn->prepare("SELECT username, id_image FROM favorite WHERE username=? and id_image=?");
     $stmt->bind_param('ss', $username, $favorite);
     $stmt->execute();
     $idImg = $stmt->get_result();
     $idImg = mysqli_fetch_assoc($idImg);
-    
-    if(!$idImg) {
+
+    if (!$idImg) {
         $stmt = $conn->prepare("INSERT INTO favorite (username, id_image) VALUES (?, ?)");
         $stmt->bind_param('ss', $username, $favorite);
         $stmt->execute();
+    }
+}
+
+//Menghapus data favorite user
+if (isset($_POST['deleteFavorite'])) {
+    $deleteFavorite = $_POST['deleteFavorite'];
+
+    $stmt = $conn->prepare("DELETE FROM favorite WHERE username=? and id_image=?");
+    $stmt->bind_param('ss', $username, $deleteFavorite);
+    $stmt->execute();
+
+    echo 'hidden';
+}
+
+//Menghapus dan menambahkan favorite by detail.php
+if (isset($_POST['btnFavorite'])) {
+    $idImg = $_POST['btnFavorite'];
+
+    $stmt = $conn->prepare("SELECT username FROM favorite WHERE username=? and id_image=?");
+    $stmt->bind_param('ss', $username, $idImg);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $result = mysqli_fetch_assoc($result);
+    if ($result) {
+        $stmt = $conn->prepare("DELETE FROM favorite WHERE username=? and id_image=?");
+        $stmt->bind_param('ss', $username, $idImg);
+        $stmt->execute();
+        echo 'Favorite';
+    } else {
+        $stmt = $conn->prepare("INSERT INTO favorite (username, id_image) VALUES (?, ?)");
+        $stmt->bind_param('ss', $username, $idImg);
+        $stmt->execute();
+        echo 'Rejected';
     }
 }

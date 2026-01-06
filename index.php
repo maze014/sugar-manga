@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['current'] = $_GET['category'] ?? 'null';
+$_SESSION['path'] = basename($_SERVER['PHP_SELF']);
 include "koneksi.php";
 $stmt = $conn->prepare("SELECT username, password, name_file FROM user WHERE username=?");
 $stmt->bind_param('s', $_SESSION['username']);

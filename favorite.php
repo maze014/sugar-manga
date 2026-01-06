@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['current'] = $_GET['category'] ?? 'null';
+$_SESSION['path'] = basename($_SERVER['PHP_SELF']);
 include "koneksi.php";
 $stmt = $conn->prepare("SELECT username, password, name_file FROM user WHERE username=?");
 $stmt->bind_param('s', $_SESSION['username']);
@@ -28,7 +29,9 @@ $idImg = $stmt->get_result();
 
 <body class="bg-[url('https://cdn.nekosia.cat/images/cowgirl/68649ca1563f6b10cc958352-compressed.jpg')] bg-cover bg-center bg-fixed">
     <!-- navbar -->
-     <input type="hidden" value="<?php while($row = $idImg->fetch_assoc()) { echo $row['id_image'] . ','; } ?>" />
+    <input type="hidden" value="<?php while ($row = $idImg->fetch_assoc()) {
+                                    echo $row['id_image'] . ',';
+                                } ?>" />
     <div class="hidden md:block fixed top-0 w-full z-50">
         <?php include "./component/navbar.php" ?>
     </div>
@@ -46,6 +49,8 @@ $idImg = $stmt->get_result();
         </div>
     </div>
 
+
+    <!-- Tampilan belum login jika menuju ke favorite -->
     <?php if (!isset($_SESSION['username'])): ?>
         <div class="container absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[80%] md:w-1/2 p-4 bg-white/40 backdrop-blur-md rounded-xl">
             <div class="flex gap-2 items-center justify-evenly pb-4">
@@ -61,17 +66,30 @@ $idImg = $stmt->get_result();
                 <a class="py-2 basis-1/2 transition bg-violet-700 text-center shadow-lg shadow-violet-700/60 rounded-full text-md text-white font-medium hover:shadow-violet-700 hover:bg-violet-500" href="register.php">Register</a>
             </div>
         </div>
+    <?php else: ?>
+        <!-- Tampilan jika sudah login dan tidak ada favorite -->
+        <?php if ($idImg->num_rows > 0): ?>
+            <!-- tags waifu -->
+            <?php include "./component/categories.php" ?>
+            <!-- tampilan waifu -->
+            <div id="neko" class="container max-w-[90%] mx-auto lg:max-w-full columns-1 md:columns-2 lg:columns-3 mb-24 mt-4 md:mb-8"></div>
+        <?php else: ?>
+            <div class="container flex flex-col gap-y-4 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[80%] md:w-1/2 lg:w-[40%] p-4 bg-white/40 backdrop-blur-md rounded-xl">
+                <h1 class="text-center font-medium tracking-wider md:text-xl lg:text-2xl">Anda belum memiliki Favorite Waifu</h1>
+                <a class="py-2 transition bg-violet-700 text-center shadow-lg shadow-violet-700/60 rounded-full text-md text-white font-medium hover:shadow-violet-700 hover:bg-violet-500" href="index.php">Home</a>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
-    <!-- tampilan waifu -->
-    <div id="neko" class="container max-w-[90%] mx-auto lg:max-w-full columns-1 md:columns-2 lg:columns-3 my-24 md:mt-28 md:mb-8"></div>
 
     <!-- navbar mobile -->
     <div class="md:hidden">
         <?php include "./component/navbar_mobile.php" ?>
     </div>
-    <script type="text/javascript" src="./component/detailProfile.js"></script>
+    <script type="text/javascript" src="./component/favoriteProfile.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./component/favoriteWaifu.js"></script>
+    <?php if (isset($_SESSION['username'])): ?>
+        <script type="text/javascript" src="./restApi/favoriteWaifu.js"></script>
+    <?php endif; ?>
 </body>
 
 </html>

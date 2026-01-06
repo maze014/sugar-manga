@@ -19,23 +19,17 @@ const componentWaifu = function (value) {
 }
 
 if (typeof (Storage) !== "undefined") {
-    const cnt = 8;
     if (localStorage.getItem('waifu') === null) {
-        $.ajax({
-            url: 'https://api.nekosia.cat/api/v1/images/blonde?count=' + cnt,
-            type: 'GET',
-            dataType: 'json',
-            success: function (results) {
-                let result = results.images;
-                localStorage.setItem('waifu', JSON.stringify(result));
-            }
-        });
+        fetch("./restApi/nekosiaApi.php")
+            .then(res => res.json())
+            .then(data => localStorage.setItem('waifu', JSON.stringify(data)));
     }
     else {
         let result = localStorage.getItem('waifu');
         result = JSON.parse(result);
-        // console.log(result);
+        result = result.images;
 
+        // localStorage.removeItem('waifu');
         const category = document.getElementById('categories').getAttribute('name');
         // console.log(category);
         const categories = new Set();
@@ -97,7 +91,7 @@ if (typeof (Storage) !== "undefined") {
             btn.addEventListener('click', () => {
                 const xhttp = new XMLHttpRequest();
                 const altImg = btn.parentElement.previousElementSibling.alt;
-                xhttp.onload = function() {}
+                xhttp.onload = function () { }
                 xhttp.open("POST", "cek_password.php", true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                 xhttp.send("favorite=" + encodeURIComponent(altImg));
