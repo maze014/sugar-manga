@@ -2,7 +2,7 @@
 module.exports = {
   content: ["./*.{js,php}",
     "./component/*.{js,php}",
-    "./restApi/*.js"],
+    "./restApi/*.{js,php}"],
   theme: {
     extend: {
       keyframes: {

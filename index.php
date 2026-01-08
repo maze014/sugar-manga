@@ -22,6 +22,7 @@ $user = mysqli_fetch_assoc($result);
 
 <body class="bg-[url('https://cdn.nekosia.cat/images/cowgirl/68649ca1563f6b10cc958352-compressed.jpg')] bg-cover bg-center bg-fixed">
     <!-- navbar -->
+     <input id="searchIndex" type="hidden" value="<?= htmlspecialchars($_SESSION['current']) ?>">
     <div class="hidden md:block fixed top-0 w-full z-50">
         <?php include "./component/navbar.php" ?>
     </div>
@@ -30,7 +31,7 @@ $user = mysqli_fetch_assoc($result);
             <?php include "./component/identitas.php" ?>
         </div>
         <div class="relative mr-4 w-[45%]">
-            <input class="w-full outline-0 shadow-lg shadow-slate-800/60 p-2 rounded-md" name="search" type="text" placeholder="Search for waifu" autocomplete="off" />
+            <input id="keywordMobile" class="w-full outline-0 shadow-lg shadow-slate-800/60 p-2 rounded-md" name="search" type="text" placeholder="Search for waifu" autocomplete="off" />
             <span class="absolute right-0 pt-1 px-1 bg-white rounded-lg">
                 <svg class="w-8 h-8 text-slate-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />

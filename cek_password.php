@@ -64,7 +64,6 @@ if (isset($_POST['usernameEdit'])) {
 //menambahkan favorite ke table favorite menggunakan ajax
 if (isset($_POST['favorite'])) {
     $favorite = $_POST['favorite'];
-
     $stmt = $conn->prepare("SELECT username, id_image FROM favorite WHERE username=? and id_image=?");
     $stmt->bind_param('ss', $username, $favorite);
     $stmt->execute();
@@ -86,7 +85,13 @@ if (isset($_POST['deleteFavorite'])) {
     $stmt->bind_param('ss', $username, $deleteFavorite);
     $stmt->execute();
 
-    echo 'hidden';
+    $stmt = $conn->prepare("SELECT COUNT(*) AS total FROM favorite WHERE username=?");
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $idImg = $stmt->get_result();
+    $idImg = mysqli_fetch_assoc($idImg);
+
+    echo $idImg['total'] == 0 ? 'null' : 'hidden';
 }
 
 //Menghapus dan menambahkan favorite by detail.php
