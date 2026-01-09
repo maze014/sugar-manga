@@ -36,6 +36,7 @@ mysqli_close($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/output.css">
+    <link rel="icon" type="image/x-icon" href="./src/img/logo_removeBG.png">
     <title>Profile Page</title>
 </head>
 
@@ -61,7 +62,7 @@ mysqli_close($conn);
             <?php endif; ?>
         <?php else: ?>
             <span class="w-1/2 md:w-[40%] lg:w-[35%] rounded-full overflow-hidden">
-                <img class="scale-[1.5]" src="./src/img/logo.png" alt="logo waifuChan">
+                <img class="scale-[1.5]" src="./src/img/logo_removeBG.png" alt="logo waifuChan">
             </span>
         <?php endif; ?>
         <div class="w-2/3 md:w-[50%] flex flex-col gap-4">

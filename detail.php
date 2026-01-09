@@ -16,6 +16,7 @@ $result = mysqli_fetch_assoc($result);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./src/output.css">
+    <link rel="icon" type="image/x-icon" href="./src/img/logo_removeBG.png">
     <title>Detail Page</title>
 </head>
 
